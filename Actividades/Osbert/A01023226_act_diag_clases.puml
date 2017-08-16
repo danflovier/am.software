@@ -60,9 +60,9 @@ Matrícula: A01023226'/
     +consulta_inv();
   }
 
-  Almacen -- Obras : guarda
-  Compra *-- Obras : contiene
-  Venta -- Almacen : tiene
+  Almacen *-- Obras : guarda
+  Compra --o Almacen : contiene
+  Venta --o Almacen : tiene
   Vendedor -- Venta : realiza
   Cliente -- Venta : genera
 @enduml
