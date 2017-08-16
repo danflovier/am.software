@@ -24,6 +24,7 @@ Matrícula: A01023226'/
   Class Venta{
     -string ID_venta;
     -date fecha;
+    -Vendedor vendedor;
     -Obras obra;
     -int cantidad;
     -float precio_venta;

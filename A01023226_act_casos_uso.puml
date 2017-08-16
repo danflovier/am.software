@@ -9,7 +9,7 @@ actor Cliente
 actor Vendedor_Osbert
 
   rectangle Sistema_Cuadros {
-    Cliente --> (Compra de cuadros)
+    Cliente --> (Venta de cuadros)
     (Compra de cuadros) <-- Vendedor_Osbert
     (Venta de cuadros) <-- Vendedor_Osbert
     (Generacion de reportes) <-- Vendedor_Osbert
