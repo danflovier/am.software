@@ -6,8 +6,8 @@ Matrícula: A01023226'/
   Class Compra{
     -string ID_compra;
     -date fecha;
+    -Vendedor vendedor;
     -Obras obra;
-    -float cantidad;
     -float precio_compra;
 
     +Compra();
@@ -15,28 +15,29 @@ Matrícula: A01023226'/
     +void generar_reporte();
   }
 
-  Class Cliente{
-    -string nombre;
-
-    +Cliente();
-  }
-
   Class Venta{
     -string ID_venta;
     -date fecha;
-    -Vendedor vendedor;
+    -Cliente cliente;
     -Obras obra;
     -int cantidad;
     -float precio_venta;
 
     +Venta();
+    +void calcular_precio();
+    +void generar_reporte();
+  }
+
+  Class Cliente{
+    -string nombre;
+    +Cliente();
   }
 
   Class Vendedor{
     -string ID_vendedor;
     -string nombre;
     -string direccion_vendedor;
-
+    -bool oferta_obra;
     +Vendedor();
   }
 
@@ -52,7 +53,8 @@ Matrícula: A01023226'/
   }
 
   Class Almacen{
-    -string id_almacen;
+    -string ID_almacen;
+    -Obras obra;
 
     +Almacen();
     +alta_inv();
@@ -61,8 +63,8 @@ Matrícula: A01023226'/
   }
 
   Almacen *-- Obras : guarda
-  Compra --o Almacen : contiene
+  Compra --o Almacen : almacena
   Venta --o Almacen : tiene
-  Vendedor -- Venta : realiza
+  Vendedor -- Compra : acuerda
   Cliente -- Venta : genera
 @enduml
