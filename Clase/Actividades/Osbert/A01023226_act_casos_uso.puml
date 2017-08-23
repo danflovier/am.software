@@ -1,0 +1,18 @@
+/' ACTIVIDAD 1 - Diagramas de casos de uso
+Nombre: Daniela Flores Javier
+Matrícula: A01023226'/
+
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor Cliente
+actor Vendedor_Osbert
+
+  rectangle Sistema_Cuadros {
+    Cliente --> (Venta de cuadros)
+    (Compra de cuadros) <-- Vendedor_Osbert
+    (Venta de cuadros) <-- Vendedor_Osbert
+    (Generacion de reportes) <-- Vendedor_Osbert
+  }
+
+@enduml
