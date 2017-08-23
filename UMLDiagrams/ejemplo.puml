@@ -1,0 +1,23 @@
+@startuml
+  abstract Class Persona<<template>> {
+    +string nombre;
+    -int edad;
+    #char genero;
+    /'~int var privado || Para los elementos del paquete en Java'/
+    Persona();
+    virtual void hablar() = 0;
+  }
+
+  Class Profesor
+  Interface Interfaz
+  Class Transporte
+  Class Asientos
+  Class Cumbias
+
+  Persona <|-- Profesor : anotacion
+  Interfaz <|.. Profesor
+  Profesor --> Transporte : usa
+
+  Transporte o-- Asientos : aggregation
+  Transporte *-- Cumbias : composition
+@enduml
