@@ -1,0 +1,73 @@
+@startuml
+
+Class Computadora{
+	#Computadora();
+
+	#string tipo;
+	#float ram;
+	#string procesador;
+	#string motherboard;
+	#string hard_disk;
+
+	+virtual ~Computadora();
+	+void select_de_componentes();
+	+void ensam_de_componentes();
+	+void insconfig_software();
+	+void empaquetado_computador();
+}
+
+Class Crear_Computadoras{
+	#Crear_Computadoras();
+	#static Crear_Computadoras * comp;
+	+static Crear_Computadoras * crear()
+	+<template>Tipo* Crear_c();
+}
+
+Class Clonar <<template>>{
+	#Clonar();
+	+Computadora* clone();
+}
+
+Class Desktop{
+	-Desktop();
+}
+
+Class Laptop{
+	-Laptop();
+}
+
+Class Netbook{
+	-Netbook();
+}
+
+Class Tablet{
+	-Tablet();
+}
+
+Class Rack{
+	-Rack();
+}
+
+Class Tower{
+	-Tower();
+}
+Clonar <|-- Desktop
+Clonar <|-- Laptop
+Clonar <|-- Netbook
+Clonar <|-- Tablet
+Clonar <|-- Rack
+Clonar <|-- Tower
+
+Crear_Computadoras -- Desktop : <<friend>>
+Crear_Computadoras -- Laptop : <<friend>>
+Crear_Computadoras -- Netbook : <<friend>>
+Crear_Computadoras -- Tablet : <<friend>>
+Crear_Computadoras -- Rack : <<friend>>
+Crear_Computadoras -- Tower : <<friend>>
+
+Computadora <|-- Clonar
+Crear_Computadoras -- Computadora
+Crear_Computadoras *-- Crear_Computadoras
+
+
+@enduml
