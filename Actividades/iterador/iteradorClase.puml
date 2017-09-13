@@ -1,0 +1,23 @@
+@startuml
+Class IntCollection<<template T>>{
+  #T* array;
+  #int size;
+  #int cont;
+
+  +friend class IntIterator<T>;
+  +IntCollection(){}
+  +void addElement(T value);
+  +IntIterator<T>* getIterator();
+  +T at(int pos);
+}
+
+Class IntIterator<<template T>>{
+  #IntCollection<T> coll;
+  #int cont = 0;
+
+  +IntIterator(const IntCollection<T>& coll){}
+	+bool hasNext();
+	+T Next(){}
+}
+
+@enduml
