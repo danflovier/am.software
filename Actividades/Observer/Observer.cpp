@@ -1,43 +1,85 @@
 #include <vector>
-#include <list>
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-class Subject{
-    //Lets keep a track of all the shops we have observing
-
-   vector<Observer*> list;
-
-   /*
-   vector<Mvs*> mvs;
-   vector<Televisa*> televisa;
-   vector<RadioReal*> radioreal;
-   vector<NoticiasInternacionales*> notinter;
-	*/
-
-public:
-    void Attach(Observer* observer){
-    	list.push_back(observer);
-    }
-    void Detach(Observer* observer){
-    	list.erase(remove(list.begin(), list.end(), observer), list.end());    
-    }
-
-    void Notificar(string anuncio){
-    	for(vector<Observer*>::const_iterator iter = observers.begin(); iter != observers.end(); ++iter){
-        	if(*iter != 0){
-            	(*iter)->publica(anuncio);
-        	}
-        }
-
-    }
+/////////////////////////////////
+/////////// OBSERVER ///////////
+///////////////////////////////
+class Observer{
+	public:
+    	virtual void publica(string anuncio) = 0;
 };
 
 
+class Mvs : public Observer{
+	private:
+		string noticiero;
+
+	public:	
+		Mvs(string n){ noticiero = n; }
+    	void publica(string anuncio){
+    		cout << "\t - Noticieros " << noticiero << ": " << anuncio << endl;
+    	}       
+};
+
+class Televisa : public Observer{
+	private:
+		string noticiero;
+
+	public:
+		Televisa(string n){ noticiero = n; }
+    	void publica(string anuncio){
+    		cout << "\t - Noticieros " << noticiero << ": " << anuncio << endl;
+    	}          
+};
+
+class RadioReal : public Observer{
+	private:
+		string noticiero;
+
+	public:
+		RadioReal(string n){ noticiero = n; }
+    	void publica(string anuncio){
+    		cout << "\t - Noticieros " << noticiero << ": " << anuncio << endl;
+    	}
+};
+
+class NoticiasInternacionales : public Observer{
+	private:
+		string noticiero;
+
+	public:
+		NoticiasInternacionales(string n){ noticiero = n; }
+    	void publica(string anuncio){
+    		cout << "\t - Noticias " << noticiero << ": " << anuncio << endl;
+    	}     
+};
+
+
+/////////////////////////////////
+/////////// SUBJECT ////////////
+///////////////////////////////
+class Subject{
+   vector<Observer*> list;
+
+public:
+	Subject() = default;
+    void AgregarObservador(Observer* observer){
+    	list.push_back(observer);
+    }
+    
+    void Notificar(string anuncio){
+    	for(int i = 0; list.size()>i; i++){
+        	list[i]->publica(anuncio);
+        }
+    }
+};
+
 class Trump : public Subject{
 public:
+	Trump() = default;
     void Anuncia(string anuncio){
     	Notificar(anuncio);
     }
@@ -45,6 +87,7 @@ public:
 
 class Pena : public Subject{
 public:
+	Pena() = default;
     void Anuncia(string anuncio){
     	Notificar(anuncio);
     }
@@ -52,64 +95,52 @@ public:
 
 class KimJongUn : public Subject{
 public:
+	KimJongUn() = default;
     void Anuncia(string anuncio){
     	Notificar(anuncio);
     }
 };
 
+/////////////////////////////////
+///////////// MAIN  ////////////
+///////////////////////////////
+int main(){
+	// Observers
+	Mvs* mvs = new Mvs("MVS");
+	Televisa* televisa = new Televisa("Televisa");
+	RadioReal* radioreal = new RadioReal("Radio Real");
+	NoticiasInternacionales* noticiasint = new NoticiasInternacionales("Internacionales");
 
-class Observer{
-	Subject* anuncio;
-
-	public:
-    	virtual void publica(string anuncio) = 0;
-};
+	// Subjects
+	Trump* trump = new Trump();
+	Pena* pena = new Pena();
+	KimJongUn* kimjongun = new KimJongUn();
 
 
-class Mvs : Observer{
-    string anuncio;
+	// Relación pres-televisoras
+	trump->AgregarObservador(mvs);
+	trump->AgregarObservador(televisa);
+	trump->AgregarObservador(radioreal);
+	trump->AgregarObservador(noticiasint);
+	
 
-	public:
-    	Mvs() = default;
-    	void publica(string anuncio){
-    		Trump trump = new Trump;
-    	}       
-};
+	pena->AgregarObservador(televisa);
+	pena->AgregarObservador(radioreal);
 
-class Televisa : Observer{
-    string anuncio;
+	kimjongun->AgregarObservador(noticiasint);
 
-	public:
-    	Televisa() = default;
-    	void publica(string anuncio){
-    		anuncio = an;
-    		Trump trump = new Trump;
-    		trump.Anuncia()
-    		Pena pena = new Pena;
-    	}          
-};
+	// Notificaciones - Actualizaciones
+	cout << endl << "..::DONALD TRUMP::.." << endl;
+	trump->Notificar("We need to build the Wall.");
 
-class RadioReal : Observer{
-    string anuncio;
+	cout << endl << "..::PEÑA NIETO::.." << endl;
+	pena->Notificar("No cederemos a la construcción del muro.");
 
-	public:
-    	RadioReal() = default;
-    	void publica(string an){
-    		anuncio = an;
-    		Trump trump = new Trump;
-    		Pena pena = new Pena;
-    	}        
-};
+	cout << endl << "..::KIM JONG UN::.." << endl;
+	kimjongun->Notificar("Enviaremos misiles a Japón.");
+	cout << endl;
+	
 
-class NoticiasInternacionales : Observer{
-     string anuncio;
-
-	public:
-    	NoticiasInternacionales() = default;
-    	void publica(string an){
-    		anuncio = an;
-    		Trump trump = new Trump;
-    		KimJongUn kimjongun = new KimJongUn;
-    	}     
-};
+	return 0;
+}
 
