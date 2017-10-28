@@ -22,6 +22,7 @@ int main(){
 	// Impl. FactoryMethod
 	Laptop* laptop = compu->Crear_c<Laptop>();
 	Computadora *computadora1 = laptop->clone();
+
 	mostrar_operaciones(computadora1); //Operaciones de la fabrica
 
 	//Clonación de la laptop
