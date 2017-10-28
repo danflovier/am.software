@@ -126,9 +126,9 @@ class Grafico{
 
 		// Notificación para las colisiones generadas
 		void notificar(int x, int y, Iterator<Grafico*> it){
-    		if(it.hasNext()) {
-      			cout << endl << "\t::ALERTA:: Colisión de " << nombre 
-      			     << " ubicada en ( "<< x << " , " << y << " ) ";
+    		while(it.hasNext()) {
+      			cout << endl << "\t::ALERTA:: " << it.Next()->nombre << ": Colisión de " << nombre 
+      			     << " observada en [ "<< x << " , " << y << " ] ";
       			it.Next();
     		}
   		}
@@ -311,8 +311,8 @@ class Juego{
       				}
       				
       				else{
-      					//cout << endl << "\tI " << graficos.at(i)->getNombre() << " \t   " 
-      					//     << graficos.at(i)->getX() << " " << graficos.at(i)->getY() <<  "  ";
+      					cout << endl << "\tI " << graficos.at(i)->getNombre() << " " 
+      					     << "[" << graficos.at(i)->getX() << "," << graficos.at(i)->getY() << "]";
       					
       					// Eliminamos posición inicial del gráfico para moverlo
       					tablero[graficos.at(i)->getX()][graficos.at(i)->getY()] = 0;
@@ -360,8 +360,8 @@ class Juego{
       						graficos.at(i)->notificar(graficos.at(i)->getX(),graficos.at(i)->getY(),*it);
       						t++;
       					}
-      					//cout << endl << "\tF " << graficos.at(i)->getNombre() << "\t" << graficos.at(i)->getX() 
-      					//     << " "    << graficos.at(i)->getY()      <<  "  "<< endl;	
+      					cout << endl << "\tF " << graficos.at(i)->getNombre() << " " 
+      						 << "[" << graficos.at(i)->getX() << "," << graficos.at(i)->getY()<< "]";	
       				} 
       			} 
       		}
