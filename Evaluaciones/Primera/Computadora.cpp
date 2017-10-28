@@ -13,8 +13,6 @@ void mostrar_operaciones(Computadora* computadora);
 /////////////////////////////////////////////////////////////
 
 int main(){
-
-
 	// Impl. Singleton
 	Crear_Computadoras* compu = Crear_Computadoras::crear();
 	
